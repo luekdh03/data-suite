@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import io 
 import pandas as pd
-import algo_las
+import algo_las as algo_las
 
 app = Flask(__name__)
 
