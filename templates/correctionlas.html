@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functionality 1</title>
+    <link rel="stylesheet" href="/static/correctionlas.css">
+ 
+</head>
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h1>Réponses étudiants</h1>
+            <form id="fileForm" method="POST" enctype="multipart/form-data">
+                <input type="file" id="file-upload" name="file">
+                <button type="button" id="uploadButton">Upload</button>
+                <button type="button" id="correctionButton" hidden="True">Calculer Notes</button>
+            </form>
+        </div>
+        <div class="scroll-section">
+            <h1>Corrigé</h1>
+            <div class="scroll-content" id="scrollContent">
+                <p>Télécharger CVS de la correction pour acceder à la correction.</p>
+            </div>
+        </div>
+    </div>
+    <script src="/static/correctionlas.js"></script>
+</body>
+</html>

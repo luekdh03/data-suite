@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.container {
+    width: 80%;
+    height: 70%;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.title-section {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5D035E;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.functional-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.logo-section img {
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+}
+
+.button-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-section button {
+    width: 80%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: #5D035E;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-section button:hover {
+    background-color: #FACA53;
+}
