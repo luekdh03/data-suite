@@ -70,4 +70,4 @@ def correctionlas():
     return render_template('correctionlas.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
