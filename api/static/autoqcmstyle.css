@@ -1,0 +1,59 @@
+.scroll-container {
+    width: 800px;
+    height: 500px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+.test {
+    height: 500px;
+}
+
+  .scroll-frame {
+    position: absolute;
+    top: 5%;
+    bottom: 20%;
+    left: 20px;
+    right: 20px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+
+  .entry {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .entry:last-child {
+    border-bottom: none;
+  }
+
+
+  .download-btn {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #5D035E;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .download-btn:hover {
+    background-color: #49024a;
+  }

@@ -1,0 +1,64 @@
+
+  <question type="multichoice">
+    <name>
+      <text>[[QCM_NAME]]</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ENONCE]]<br></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <shuffleanswers>false</shuffleanswers>
+    <answernumbering>none</answernumbering>
+    <correctfeedback format="html">
+      <text>Votre réponse est correcte.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Votre réponse est partiellement correcte.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Votre réponse est incorrecte.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="[[FRACTION_A]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-A]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;"><span>[[CORR-A]]</span><br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="[[FRACTION_B]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-B]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">[[CORR-B]]<br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="[[FRACTION_C]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-C]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">[[CORR-C]]<br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="[[FRACTION_D]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-D]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">[[CORR-D]]<br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="[[FRACTION_E]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-E]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">[[CORR-E]]<br></p>]]></text>
+      </feedback>
+    </answer>
+    <answer fraction="[[FRACTION_F]]" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">[[ITEM-F]]<br></p>]]></text>
+      <feedback format="html">
+        <text><![CDATA[<p dir="ltr" style="text-align: left;">[[CORR-F]]<br></p>]]></text>
+      </feedback>
+    </answer>
+  </question>

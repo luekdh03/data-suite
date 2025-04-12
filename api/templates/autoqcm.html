@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATSM - Data Suite</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/autoqcmstyle.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="title-section">
+            <h1 class="title">AutoQCM by ATSM</h1>
+        </div>
+        <div class="functional-section">
+            <div class="logo-section"> 
+                <div class="test mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
+
+                    <!-- Enonce Dropzone -->
+                    <div class="relative group">
+                      <input type="file" id="file-enonce" class="hidden" />
+                      <label for="file-enonce"
+                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300"
+                        style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
+                        onmouseover="this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E';"
+                        onmouseout="this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))';">
+                        <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
+                          style="background-color: inherit;">
+                          Enoncé
+                        </span>
+                        <img src="/static/upload.png" alt="" width="70" height="70">
+                        <p class="text-sm text-white opacity-80">Glisse et dépose ton fichier ici ou clique pour le téléverser.</p>
+                      </label>
+                    </div>
+                  
+                    <!-- Correction Dropzone -->
+                    <div class="relative group">
+                      <input type="file" id="file-correction" class="hidden" />
+                      <label for="file-correction"
+                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300"
+                        style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
+                        onmouseover="this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E';"
+                        onmouseout="this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))';">
+                        <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
+                          style="background-color: inherit;">
+                          Correction
+                        </span>
+                        <img src="/static/upload.png" alt="" width="70" height="70">
+                        <p class="text-sm text-white opacity-80">Glisse et dépose ton fichier ici ou clique pour le téléverser.</p>
+                      </label>
+                    </div>
+                  
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                      <button id="submitBtn" class="w-full text-white font-semibold py-3 px-4 rounded-xl transition"
+                        style="background-color: #5D035E;" onmouseover="this.style.backgroundColor='#470348'"
+                        onmouseout="this.style.backgroundColor='#5D035E'">
+                        Générer
+                      </button>
+                    </div>
+                  </div>
+            </div>
+            <div class="button-section">
+                
+                <div class="scroll-container">
+                
+                    <div class="scroll-frame" id="entryList">
+                      <!-- Read-only entries go here -->
+                    </div>
+                
+                    <button class="download-btn" onclick="download()">Download Entries</button>
+                    
+                  </div>
+
+            </div>
+        
+    </div>
+
+    <script>
+    
+        qcmxml = null;
+        qcmfilename = null;
+
+        function showEntries (entries) {
+            console.log(entries)
+            for (const i in entries){
+              const entryDiv = document.createElement('div');
+              entryDiv.className = 'entry';
+              entryDiv.textContent = entries[i];
+              document.getElementById('entryList').appendChild(entryDiv);  
+            };
+        }
+    
+        function download() {
+          if (!qcmxml || !qcmfilename){
+            alert("Il faut d'abord générer des qcms")
+            return;
+          }
+          const blob = new Blob([qcmxml], {type:"xml"});
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = qcmfilename;
+          link.click();
+          link.remove();
+          URL.revokeObjectURL(link.href);
+        }
+
+
+        document.getElementById('submitBtn').addEventListener('click', async function () {
+        const enonceFile = document.getElementById('file-enonce').files[0];
+        const correctionFile = document.getElementById('file-correction').files[0];
+
+
+        if (!enonceFile || !correctionFile) {
+          alert("Il faut un Enoncé et une Correction pour générer un XML-Moodle !");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('enonce', enonceFile);
+        formData.append('correction', correctionFile);
+
+        try {
+          const response = await fetch('/uploadAutoQCM', {
+            method: 'POST',
+            body: formData
+          });
+
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            alert(errorData.message);
+            return;
+          }
+
+          const data = await response.json();
+
+
+          //console.log(data.xml, data.filename, data.qmcs)
+
+          qcmxml = data.xml;
+          qcmfilename = data.filename;
+
+          showEntries(data.qcms);
+          
+
+          /*
+          if (!response.ok) {
+            const errorData = await response.json();
+            alert(errorData.message);
+            return;
+          }
+
+          const blob = await response.blob();
+
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "filename.xml";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+
+          */
+          // alert(result.message || "Files uploaded successfully!");
+        } catch (err) {
+          console.error(err);
+          alert("Error du téléchargement !");
+        }
+      });
+
+      </script>
+
+
+
+
+
+
+</body>
+</html>
