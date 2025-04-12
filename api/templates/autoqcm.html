@@ -16,22 +16,26 @@
         </div>
         <div class="functional-section">
             <div class="logo-section"> 
-                <div class="test mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
+                <div class="test w-4/5 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
 
                     <!-- Enonce Dropzone -->
                     <div class="relative group">
                       <input type="file" id="file-enonce" class="hidden" />
                       <label for="file-enonce"
-                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300"
+                        id="dropzone-enonce"
+                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300 overflow-hidden"
                         style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
-                        onmouseover="this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E';"
-                        onmouseout="this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))';">
+                        onmouseover="if(!this.classList.contains('disabled')){ this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E'; }"
+                        onmouseout="if(!this.classList.contains('disabled')){ this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))'; }">
                         <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
                           style="background-color: inherit;">
                           Enoncé
                         </span>
-                        <img src="/static/upload.png" alt="" width="70" height="70">
-                        <p class="text-sm text-white opacity-80">Glisse et dépose ton fichier ici ou clique pour le téléverser.</p>
+
+                        <div id="enonce-content" class="flex flex-col items-center justify-center">
+                          <img id="enonce-icon" src="/static/upload.png" alt="" width="70" height="70">
+                          <p id="enonce-text" class="text-sm text-white opacity-80">Cliquer ici pour téléverser le ficher !</p>
+                        </div>
                       </label>
                     </div>
                   
@@ -39,17 +43,22 @@
                     <div class="relative group">
                       <input type="file" id="file-correction" class="hidden" />
                       <label for="file-correction"
-                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300"
+                        id="dropzone-correction"
+                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300 overflow-hidden"
                         style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
-                        onmouseover="this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E';"
-                        onmouseout="this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))';">
+                        onmouseover="if(!this.classList.contains('disabled')){ this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E'; }"
+                        onmouseout="if(!this.classList.contains('disabled')){ this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))'; }">
                         <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
                           style="background-color: inherit;">
                           Correction
                         </span>
-                        <img src="/static/upload.png" alt="" width="70" height="70">
-                        <p class="text-sm text-white opacity-80">Glisse et dépose ton fichier ici ou clique pour le téléverser.</p>
+
+                        <div id="correction-content" class="flex flex-col items-center justify-center">
+                          <img id="correction-icon" src="/static/upload.png" alt="" width="70" height="70">
+                          <p id="correction-text" class="text-sm text-white opacity-80">Cliquer ici pour téléverser le ficher !</p>
+                        </div>
                       </label>
+
                     </div>
                   
                     <!-- Submit Button -->
@@ -79,6 +88,55 @@
     </div>
 
     <script>
+
+        const fileInput = document.getElementById('file-enonce');
+        const dropzone = document.getElementById('dropzone-enonce');
+        const icon = document.getElementById('enonce-icon');
+        const text = document.getElementById('enonce-text');
+
+        fileInput.addEventListener('change', function () {
+          if (this.files.length > 0) {
+            const filename = this.files[0].name;
+
+            // Replace icon with a file icon
+            icon.src = "/static/document.png"
+
+            // Replace text with filename
+            text.textContent = filename;
+
+            // Disable hover effect
+            dropzone.classList.add("disabled");
+            dropzone.style.cursor = "default";
+          }
+        });
+
+        const fileInputCorr = document.getElementById('file-correction');
+        const dropzoneCorr = document.getElementById('dropzone-correction');
+        const iconCorr = document.getElementById('correction-icon');
+        const textCorr = document.getElementById('correction-text');
+
+        fileInputCorr.addEventListener('change', function () {
+          if (this.files.length > 0) {
+            const filename = this.files[0].name;
+
+            // Replace icon with a file icon
+            iconCorr.src = "/static/document.png"
+
+            // Replace text with filename
+            textCorr.textContent = filename;
+
+            // Disable hover effect
+            dropzoneCorr.classList.add("disabled");
+            dropzoneCorr.style.cursor = "default";
+          }
+        });
+
+
+
+
+
+
+
     
         qcmxml = null;
         qcmfilename = null;
