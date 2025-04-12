@@ -33,11 +33,7 @@
                         </span>
 
                         <div id="enonce-content" class="flex flex-col items-center justify-center">
-                          <svg id="enonce-icon" class="w-12 h-12 text-white opacity-50 mb-2" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M16 12l-4-4m0 0l-4 4m4-4v12" />
-                          </svg>
+                          <img id="enonce-icon" src="/static/upload.png" alt="" width="70" height="70">
                           <p id="enonce-text" class="text-sm text-white opacity-80">Drag & drop your file here or click to upload</p>
                         </div>
                       </label>
@@ -98,13 +94,7 @@
             const filename = this.files[0].name;
 
             // Replace icon with a file icon
-            icon.outerHTML = `
-              <svg class="w-12 h-12 text-white opacity-70 mb-2" fill="none" stroke="currentColor" stroke-width="2"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4 4h16v16H4V4zm4 4h8v2H8V8zm0 4h8v2H8v-2z" />
-              </svg>
-            `;
+            icon.src = "/static/document.png"
 
             // Replace text with filename
             text.textContent = filename;
