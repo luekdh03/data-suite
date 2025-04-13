@@ -84,7 +84,7 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
                             student_grade -= 1
             
             debug_text += f" new grade : {student_grade}\n"
-        raise ValueError(debug_text)
+        #raise ValueError(debug_text)
             
 
                         

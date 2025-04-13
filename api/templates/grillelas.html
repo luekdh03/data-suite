@@ -37,6 +37,14 @@
                         </div>
                       </label>
                     </div>
+
+                    <div class="toggle-container">
+                        <label class="switch">
+                          <input type="checkbox" id="shs_toggle">
+                          <span class="slider"></span>
+                        </label>
+                        <span class="label-text">SHS</span>
+                    </div>
                   
                     <!-- Submit Button -->
                     <div class="pt-4">
@@ -61,6 +69,8 @@
         const dropzone = document.getElementById('dropzone-enonce');
         const icon = document.getElementById('enonce-icon');
         const text = document.getElementById('enonce-text');
+
+        const SHS_switch = document.getElementById("shs_toggle")
 
         fileInput.addEventListener('change', async function () {
           if (this.files.length > 0) {
@@ -162,7 +172,11 @@
                 console.log(answerlist)
 
                 formdata.append("answerlist", answerlist)
-                formdata.append("shs", "false")
+
+                if(SHS_switch.checked){
+                    formdata.append("shs", "true")
+                }else{formdata.append("shs", "false")}
+
 
                 try {
                     const response = await fetch('/las-calc-note', {
