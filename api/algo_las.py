@@ -18,10 +18,10 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
 
     # Affiche un warning si le nombre de QMC calculé est non-entier
     if n_qcm != int(n_qcm):
-        return "Attention, nombre de QCMs non entier /!\\/!\\"
+        raise ValueError("Le nombre du QCM n'est pas int ! ") 
     
-    print(f"Nombre de QCMs : {int(n_qcm)}")
-    print(f"Nombre de candidats : {n_students}")
+    #print(f"Nombre de QCMs : {int(n_qcm)}")
+    #print(f"Nombre de candidats : {n_students}")
     
     # Créer un fichier texte pour y écrire les noms des candidats, les numéros
     # étudiants et les notes
@@ -31,7 +31,7 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
     #grades_file=open(FILEPATH,'w')
     grade_text = ""
     
-    for k in range(1, n_students+1):
+    for k in range(0, n_students):
         student_grade = n_qcm
         student_line = answers_sheet.iloc[k].astype(str).to_list()
         grade_text += "\t".join(student_line[1:3]) + "\t"
