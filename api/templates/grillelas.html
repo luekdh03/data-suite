@@ -13,47 +13,47 @@
         <div class="title-section">
             <h1 class="title">Correction Colle Démat</h1>
         </div>
-        <div class="input-section">
-            <h1>Réponses étudiants</h1>
-            <div class="test w-4/5 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
-
-                <!-- Enonce Dropzone -->
-                <div class="relative group">
-                  <input type="file" id="file-enonce" class="hidden" />
-                  <label for="file-enonce"
-                    id="dropzone-enonce"
-                    class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300 overflow-hidden"
-                    style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
-                    onmouseover="if(!this.classList.contains('disabled')){ this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E'; }"
-                    onmouseout="if(!this.classList.contains('disabled')){ this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))'; }">
-                    <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
-                      style="background-color: inherit;">
-                      Enoncé
-                    </span>
-
-                    <div id="enonce-content" class="flex flex-col items-center justify-center">
-                      <img id="enonce-icon" src="/static/upload.png" alt="" width="70" height="70">
-                      <p id="enonce-text" class="text-sm text-white opacity-80">Cliquer ici pour téléverser le ficher !</p>
+        <div class="functional-section">
+            <div class="input-section">
+                <div class="test w-4/5 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
+    
+                    <!-- Enonce Dropzone -->
+                    <div class="relative group">
+                      <input type="file" id="file-enonce" class="hidden" />
+                      <label for="file-enonce"
+                        id="dropzone-enonce"
+                        class="block w-full h-40 flex flex-col items-center justify-center text-center cursor-pointer border-2 border-gray-600 rounded-2xl bg-gray-800 text-white transition-all duration-300 overflow-hidden"
+                        style="--tw-border-opacity: 1; --tw-bg-opacity: 1;"
+                        onmouseover="if(!this.classList.contains('disabled')){ this.style.borderColor='#5D035E'; this.style.backgroundColor='#5D035E'; }"
+                        onmouseout="if(!this.classList.contains('disabled')){ this.style.borderColor='rgb(75 85 99 / var(--tw-border-opacity))'; this.style.backgroundColor='rgb(31 41 55 / var(--tw-bg-opacity))'; }">
+                        <span class="absolute top-2 left-4 text-sm font-semibold text-white px-2 rounded-md"
+                          style="background-color: inherit;">
+                          Enoncé
+                        </span>
+    
+                        <div id="enonce-content" class="flex flex-col items-center justify-center">
+                          <img id="enonce-icon" src="/static/upload.png" alt="" width="70" height="70">
+                          <p id="enonce-text" class="text-sm text-white opacity-80">Cliquer ici pour téléverser le ficher !</p>
+                        </div>
+                      </label>
                     </div>
-                  </label>
-                </div>
-              
-                <!-- Submit Button -->
-                <div class="pt-4">
-                  <button hidden="true" id="submitBtn" class="w-full text-white font-semibold py-3 px-4 rounded-xl transition"
-                    style="background-color: #5D035E;" onmouseover="this.style.backgroundColor='#470348'"
-                    onmouseout="this.style.backgroundColor='#5D035E'">
-                    Corriger
-                  </button>
-                </div>
-              </div>
-        </div>
-        <div class="scroll-section">
-            <h1>Corrigé</h1>
-            <div class="scroll-content" id="scrollContent">
-                <p>Télécharger CVS de la correction pour acceder à la correction.</p>
+                  
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                      <button hidden="true" id="submitBtn" class="w-full text-white font-semibold py-3 px-4 rounded-xl transition"
+                        style="background-color: #5D035E;" onmouseover="this.style.backgroundColor='#470348'"
+                        onmouseout="this.style.backgroundColor='#5D035E'">
+                        Corriger
+                      </button>
+                    </div>
+                  </div>
             </div>
-        </div>
+            <div class="scroll-section">
+                <div class="scroll-content" id="scrollContent">
+                    <p>Télécharger CSV de la correction pour acceder à la correction.</p>
+                </div>
+            </div>
+        </div>  
     </div>
     <script>
 
