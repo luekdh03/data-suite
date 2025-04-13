@@ -18,6 +18,26 @@ body {
     overflow: hidden;
 }
 
+.title-section {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5D035E;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.functional-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
 .input-section {
     flex: 1;
     display: flex;
