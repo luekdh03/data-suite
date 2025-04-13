@@ -36,9 +36,14 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
         student_line = answers_sheet.iloc[k].astype(str).to_list()
         grade_text += "\t".join(student_line[1:3]) + "\t"
         
+
+        debug_text = f"student : {student_line[2]}, max grade : {n_qcm}\n"
+
         for i in range(int(n_qcm)):
             correct_qcm = correct_answers[6*i:6*(i+1)]
             student_qcm = student_line[3+6*i:3+6*(i+1)]
+
+            debug_text += f"QCM{i+1} student: {student_qcm}, correct {correct_qcm}"
 
             #print(type(correct_qcm), student_qcm)
             #print(student_grade)
@@ -77,6 +82,10 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
                             student_grade -= 0.5
                         elif n_err >= 2:
                             student_grade -= 1
+            
+            debug_text += f" new grade : {student_grade}\n"
+        raise ValueError(debug_text)
+            
 
                         
         grade_text += str(student_grade).replace(".", ",") +"\n"

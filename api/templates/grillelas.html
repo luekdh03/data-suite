@@ -170,6 +170,7 @@
                     if (!response.ok) {
                         const { error } = await response.json();
                         alert("error pendant upload : " + error);
+                        console.log(error)
                     }
 
                     const { output } = await response.json();
