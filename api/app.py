@@ -1,9 +1,48 @@
-from flask import Flask, render_template, request, send_file, jsonify
+from flask import Flask, render_template, request, jsonify
+
 import api.loadpdf as loadpdf
 import api.to_xml_moodle as to_xml_moodle
+import api.algo_las as algo_las
+
 from datetime import datetime
+import pandas as pd
+import io
 
 app = Flask(__name__)
+
+
+## Gilles LAS
+@app.route("/grilleslas")
+def grilleLAS():
+    return render_template("grillelas.html")
+
+@app.route("/las-count-qcm", methods=["POST"])
+def lascountqcm():
+    file = request.files.get("reponses")
+    if not file:
+        return jsonify({"error": "Pas de fichier donnée"}), 500
+    try:
+        # extraire les donnés du doc envoyé par iostream
+        filedata = file.stream.read()
+        filestream = io.StringIO(filedata.decode("UTF8"), newline=None)
+        data = pd.read_csv(filestream)
+        
+        # compter nombres QCM
+        n_qcm = (data.shape[1] - algo_las.n_info_cols)/6
+
+        filestream.close()
+        file.close()
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    return jsonify({'rows': n_qcm})
+
+
+## AUTO QCM
+@app.route("/autoqcm")
+def autoQCM():
+    return render_template("autoqcm.html")
 
 
 @app.route("/uploadAutoQCM", methods=["POST"])
@@ -46,9 +85,7 @@ def uploadAutoQCM():
     except Exception as e:
         return jsonify({"message": f"Erreur pendant return : {e}"}), 500
 
-@app.route("/autoqcm")
-def autoQCM():
-    return render_template("autoqcm.html")
+
 
 
 @app.route("/")
