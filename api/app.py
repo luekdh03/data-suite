@@ -42,7 +42,7 @@ def lascountqcm():
 def lascalcnotes():
     try: 
         file = request.files.get("reponses")
-        shs = True if request.form.get("shs") else False
+        shs = True if request.form.get("shs") == "true" else False
         answers = request.form.get("answerlist").split(",")
     except Exception as e:
         return jsonify({"error": f"Non possible de lire POST : {e}"}), 500
