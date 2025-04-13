@@ -11,7 +11,7 @@ n_info_cols = 3
 
 def calculate_grade(answers_sheet, correct_answers, SHS):
     #print(correct_answers)
-    answers_sheet = answers_sheet.fill_na("")
+    answers_sheet = answers_sheet.fillna("")
     # Calculer le nombre de questions et d'étudiants
     n_qcm = (answers_sheet.shape[1] - n_info_cols)/6
     n_students = answers_sheet.shape[0]
