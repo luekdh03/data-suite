@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 ## Gilles LAS
-@app.route("/grilleslas")
+@app.route("/correctionlas")
 def grilleLAS():
     return render_template("grillelas.html")
 
