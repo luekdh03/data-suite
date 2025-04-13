@@ -6,16 +6,15 @@
 ## Modifié par Luekar HERKE (VP DATA mandat 24/25) pour optimisation de la mise en 
 # page sur GGSHEETS suite à la MAJ des tableurs et la mise en page conditionelle, et
 # pour intégration dans la "DATASUITE"
-import os
 
 n_info_cols = 3
 
 def calculate_grade(answers_sheet, correct_answers, SHS):
-    print(correct_answers)
+    #print(correct_answers)
 
     # Calculer le nombre de questions et d'étudiants
     n_qcm = (answers_sheet.shape[1] - n_info_cols)/6
-    n_students = answers_sheet.shape[0]-1
+    n_students = answers_sheet.shape[0]
 
     # Affiche un warning si le nombre de QMC calculé est non-entier
     if n_qcm != int(n_qcm):
@@ -27,14 +26,15 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
     # Créer un fichier texte pour y écrire les noms des candidats, les numéros
     # étudiants et les notes
 
-    FILENAME = "notes.txt"
-    FILEPATH = f'{os.path.join(os.getcwd(), "static", "outputLAS", FILENAME)}'
-    grades_file=open(FILEPATH,'w')
+    #FILENAME = "notes.txt"
+    #FILEPATH = f'{os.path.join(os.getcwd(), "static", "outputLAS", FILENAME)}'
+    #grades_file=open(FILEPATH,'w')
+    grade_text = ""
     
     for k in range(1, n_students+1):
         student_grade = n_qcm
         student_line = answers_sheet.iloc[k].astype(str).to_list()
-        grades_file.write("\t".join(student_line[1:3]) + "\t")
+        grade_text += "\t".join(student_line[1:3]) + "\t"
         
         for i in range(int(n_qcm)):
             correct_qcm = correct_answers[6*i:6*(i+1)]
@@ -79,8 +79,7 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
                             student_grade -= 1
 
                         
-        grades_file.write(str(student_grade).replace(".", ",") +"\n")
+        grade_text += str(student_grade).replace(".", ",") +"\n"
         #print(f"{student_line[1]}, {student_line[2]} : {student_grade}")
         
-    grades_file.close()
-    return FILENAME
+    return grade_text

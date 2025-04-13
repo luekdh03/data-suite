@@ -38,6 +38,27 @@ def lascountqcm():
 
     return jsonify({'rows': n_qcm})
 
+@app.route("/las-calc-note", methods=["POST"])
+def lascalcnotes():
+    file = request.files.get("reponses")
+    shs = True if request.form.get("shs") else False
+    answers = request.form.get("answerlist").split(",")
+
+    try:
+        # extraire les donnés du doc envoyé par iostream
+        filedata = file.stream.read()
+        filestream = io.StringIO(filedata.decode("UTF8"), newline=None)
+        data = pd.read_csv(filestream)
+    except Exception as e :
+        return jsonify({"error": f"Non possible de passer en filestream : {e}"}), 500
+    
+    output = algo_las.calculate_grade(data, answers, shs)
+
+    return jsonify({"output": output})
+    
+
+
+
 
 ## AUTO QCM
 @app.route("/autoqcm")

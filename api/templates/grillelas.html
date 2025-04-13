@@ -37,10 +37,10 @@
               
                 <!-- Submit Button -->
                 <div class="pt-4">
-                  <button id="submitBtn" class="w-full text-white font-semibold py-3 px-4 rounded-xl transition"
+                  <button hidden="true" id="submitBtn" class="w-full text-white font-semibold py-3 px-4 rounded-xl transition"
                     style="background-color: #5D035E;" onmouseover="this.style.backgroundColor='#470348'"
                     onmouseout="this.style.backgroundColor='#5D035E'">
-                    Générer
+                    Corriger
                   </button>
                 </div>
               </div>
@@ -90,6 +90,7 @@
 
                     const { rows } = await response.json();
                     generateRows(rows);
+                    document.getElementById("submitBtn").hidden = false;
                 } catch (error) {
                     console.error("Error:", error);
             }
@@ -136,41 +137,12 @@
                 }
             }
 
-            document.getElementById("uploadButton").addEventListener("click", async () => {
-                const form = document.getElementById("fileForm");
-                const uploadInput = document.getElementById("file-upload");
-                const uploadButton = document.getElementById("uploadButton");
-                const correctionButton = document.getElementById("correctionButton");
-                const formData = new FormData(form);
-
-                uploadInput.disabled = true;
-                uploadButton.hidden = true;
-                correctionButton.hidden = false;
-
-                try {
-                    const response = await fetch('/las-count-qcm', {
-                        method: 'POST',
-                        body: formData,
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("File upload failed");
-                    }
-
-                    const { rows } = await response.json();
-                    generateRows(rows);
-                } catch (error) {
-                    console.error("Error:", error);
-                }
-            });
 
             // handle du button pour telecharger les bonnes reponses.
-            document.getElementById("correctionButton").addEventListener("click", async () => {
-                const form = document.getElementById("fileForm");
-                const uploadInput = document.getElementById("file-upload");
-                uploadInput.disabled = false;
-                const formData = new FormData(form);
-                uploadInput.disabled = true;
+            document.getElementById("submitBtn").addEventListener("click", async () => {
+               
+                const formdata = new FormData();
+                formdata.append("reponses", fileInput.files[0])
 
                 // get awnser list
                 var answerlist = [];
@@ -184,21 +156,30 @@
                 
                 // submit to main program
 
-                formData.append("answerlist", answerlist)
-                formData.append("shs", "false")
+                console.log(answerlist)
+
+                formdata.append("answerlist", answerlist)
+                formdata.append("shs", "false")
 
                 try {
                     const response = await fetch('/las-calc-note', {
                         method: 'POST',
-                        body: formData,
+                        body: formdata,
                     });
 
                     if (!response.ok) {
-                        throw new Error("File upload failed");
+                        const { error } = await response.json();
+                        alert("error pendant upload : " + error);
                     }
 
-                    const { filename } = await response.json();
-                    downloadURI(filename, "output.txt")
+                    const { output } = await response.json();
+                    const blob = new Blob([output], {type:"text"});
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = "test.txt";
+                    link.click();
+                    link.remove();
+                    URL.revokeObjectURL(link.href);
 
                 } catch (error) {
                     console.error("Error:", error);
