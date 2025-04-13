@@ -16,6 +16,7 @@ body {
     border-radius: 10px;
     display: flex;
     overflow: hidden;
+    flex-direction: column;
 }
 
 .title-section {
