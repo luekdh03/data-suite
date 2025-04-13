@@ -40,9 +40,12 @@ def lascountqcm():
 
 @app.route("/las-calc-note", methods=["POST"])
 def lascalcnotes():
-    file = request.files.get("reponses")
-    shs = True if request.form.get("shs") else False
-    answers = request.form.get("answerlist").split(",")
+    try: 
+        file = request.files.get("reponses")
+        shs = True if request.form.get("shs") else False
+        answers = request.form.get("answerlist").split(",")
+    except Exception as e:
+        return jsonify({"error": f"Non possible de lire POST : {e}"}), 500
 
     try:
         # extraire les donnés du doc envoyé par iostream
@@ -52,7 +55,10 @@ def lascalcnotes():
     except Exception as e :
         return jsonify({"error": f"Non possible de passer en filestream : {e}"}), 500
     
-    output = algo_las.calculate_grade(data, answers, shs)
+    try:
+        output = algo_las.calculate_grade(data, answers, shs)
+    except Exception as e:
+        return jsonify({"error": f"Non possible de générer output : {e}"}), 500
 
     return jsonify({"output": output})
     
