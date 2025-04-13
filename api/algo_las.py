@@ -37,7 +37,7 @@ def calculate_grade(answers_sheet, correct_answers, SHS):
         grade_text += "\t".join(student_line[1:3]) + "\t"
         
 
-        debug_text = f"student : {student_line[2]}, max grade : {n_qcm}\n"
+        debug_text = f"student : {student_line[2]}, max grade : {n_qcm}, shs {SHS}\n"
 
         for i in range(int(n_qcm)):
             correct_qcm = correct_answers[6*i:6*(i+1)]
