@@ -13,7 +13,7 @@ Programme crée par Luekar HERKE, VP DATA à l'ATSM 2024/25
 - Après pour chaque sous-site j'ai décidé de faire un autre modul python.
 - en static il y a tous les images et CSS associé. Tous les pages derivent de styles et après il y a un CSS pour chaque sous-page
 - En templates il y a tous les HTML pour les pages.
-- 
+- Les autres fichiers python font la fonctionalité respective.
 
 
 
